@@ -1,11 +1,12 @@
 package web.read;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
@@ -15,6 +16,8 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Main {
+	//findet nicht die seiten welche nicht im paginator stehen 
+	
 
 	public static void mains(String[] args) {
 		Zwangsversteigerungen zw=new Zwangsversteigerungen();
@@ -37,7 +40,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
-		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory( "h2" );
+		    EntityManager em = emf.createEntityManager();
+		//EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 		
 			  
 		// Function<String, Integer> intToString = str->Integer.parseInt(str);
@@ -72,7 +77,7 @@ public class Main {
 		 * You can set the maximum crawl depth here. The default value is -1 for
 		 * unlimited depth
 		 */
-		config.setMaxDepthOfCrawling(1);
+		config.setMaxDepthOfCrawling(-1);
 
 		/*
 		 * You can set the maximum number of pages to crawl. The default value

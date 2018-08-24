@@ -37,6 +37,7 @@ public class BasicCrawler extends WebCrawler {
 	 */
 	@Override
 	public void visit(Page page) {
+		System.out.println(page.getWebURL().getURL());
 //		int docid = page.getWebURL().getDocid();
 //		String url = page.getWebURL().getURL();
 //		String domain = page.getWebURL().getDomain();
